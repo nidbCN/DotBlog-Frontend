@@ -21,13 +21,13 @@
         />
       </div>
 
-      <v-spacer> </v-spacer>
+      <v-spacer />
 
       <BarLinks />
     </v-app-bar>
 
     <v-main>
-      <MainContent/>
+      <MainContent />
     </v-main>
 
     <v-footer app> Powered by Vue & .NET 5 | Made with love </v-footer>
