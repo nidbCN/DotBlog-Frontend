@@ -3,7 +3,7 @@
     
       <v-col cols="12">
         <v-row align="start" justify="center">
-          <v-col cols="8">
+          <v-col cols="8" sm="10">
               <v-container fluid>
             <!--
             <v-card>

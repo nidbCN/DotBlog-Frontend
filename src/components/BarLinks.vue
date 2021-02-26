@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-btn
-      v-for="linkItem in linkList"
-      :key="linkItem"
+      v-for="(linkItem, index) in linkList"
+      :key="index"
       :href="linkItem.href"
       target="_blank"
       text
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "BarLinks",
 
   data: () => ({
     linkList: [
