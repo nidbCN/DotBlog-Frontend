@@ -3,26 +3,27 @@ import Axios from "axios";
 // 返回API的Url
 function getApiUrlFunc(aid, point) {
     let baseUrl = "https://api.gaein.cn/articles/";
-    if (aid != null || aid != undefined) {
+    if (aid != undefined || aid != null) {
         baseUrl += aid + "/";
-        if (point != null || point != undefined) {
+        if (point != undefined || point != null) {
             baseUrl += point + "/";
         }
     }
     console.log("拼接URL：" + baseUrl);
     return baseUrl;
 }
-
+// 获取随机封面
 function getRandomCoverFunc() {
+    const apiUrl = "https://api.gaein.cn/bing/pictures";
     return new Promise((resolve, reject) => {
-        Axios.get("https://api.gaein.cn/bing/pictures").then((response) => {
-            let result = response.data.url;
-            resolve(result) //相当于把东西提交
-        }).catch(function (error) {
-            reject(error) //提交错误
-            console.log("获取随机图片失败：" + error);
-        });
-    })
+        Axios.get(apiUrl)
+            .then(response => {
+                let result = response.data.url;
+                resolve(result) //相当于把东西提交
+            }).catch(error =>
+                reject(error) //提交错误
+            );
+    });
 }
 
 export default {
@@ -32,57 +33,64 @@ export default {
     },
     // 获取文章列表
     getArticleList() {
-        let result = null;
-        let url = getApiUrlFunc();
-        Axios.get(url)
-            .then(function (response) {
-                result = response.data;
-
-                // 检查是否有cover
-                for (let item of result) {
-                    if (item.coverUrl == null) {
-                        // 获取随机cover
-                        console.log(getRandomCoverFunc());
+        const url = getApiUrlFunc();
+        return new Promise((resolve, reject) => {
+            // Axios请求
+            Axios.get(url)
+                .then(response => {
+                    let resultList = response.data;
+                    // 检查是否有cover
+                    for (let item of resultList) {
+                        if (item.coverUrl == null) {
+                            // 获取随机cover
+                            getRandomCoverFunc().then((result) => {
+                                item.coverUrl = result;
+                                resolve(item);
+                            });
+                        }
                     }
-                }
-            })
-            .catch(function (error) {
-                console.log("获取文章列表失败：" + error);
-            });
-        console.log(result);
-        return result;
+                    resolve(resultList);
+                })
+                .catch(error =>
+                    reject(error)
+                );
+        });
+
     },
     // 获取文章详情
     getArticleContent(aid) {
-        let result = null;
-        let url = getApiUrlFunc(aid);
-        Axios.get(url)
-            .then(function (response) {
-                result = response.data;
-            })
-            .catch(function (error) {
-                console.log("获取文章详情失败：" + error);
-            });
-        return result;
+        const url = getApiUrlFunc(aid);
+        return new Promise((resolve, reject) => {
+            Axios.get(url)
+                .then(response => {
+                    let result = response.data;
+                    resolve(result);
+                })
+                .catch(error =>
+                    reject(error)
+                );
+        });
     },
     // 点赞文章
     updateArticleLike(aid) {
-        let result = false;
-        let url = getApiUrlFunc(aid, "Like");
-        Axios.put(url).then(() => result = true)
-            .catch(function (error) {
-                console.log("更新文章点赞数目失败：" + error);
-            });
-        return result;
+        const url = getApiUrlFunc(aid, "Like");
+        return new Promise(reject => {
+            Axios.post(url)
+                .then()
+                .catch(error =>
+                    reject(error)
+                );
+        });
+
     },
     // 阅读文章
     updateArticleRead(aid) {
-        let result = false;
-        let url = getApiUrlFunc(aid, "Read");
-        Axios.put(url).then(() => result = true)
-            .catch(function (error) {
-                console.log("更新文章阅读数目失败：" + error);
-            });
-        return result;
+        const url = getApiUrlFunc(aid, "Read");
+        return new Promise((reject) => {
+            Axios.post(url)
+                .catch(error =>
+                    reject(error)
+                );
+        });
     }
 }

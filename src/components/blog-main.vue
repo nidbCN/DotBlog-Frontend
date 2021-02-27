@@ -11,7 +11,7 @@
             </v-card>
 -->
 
-            <ArticleList />
+            <blog-article-list />
             </v-container>
           </v-col>
         </v-row>
@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import ArticleList from "./ArticleList";
+import BlogArticleList from './blog-article-list.vue';
 
 export default {
-  name: "MainContent",
+  name: "BlogMain",
   components: {
-    ArticleList,
+    BlogArticleList,
   },
 };
 </script>

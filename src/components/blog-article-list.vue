@@ -2,11 +2,7 @@
   <div>
     <v-container v-if="articleList == null" fluid>
       <v-card loading class="mx-auto">
-        <v-img
-          class="white--text align-end"
-          height="300px"
-          :src="randomCover"
-        >
+        <v-img class="white--text align-end" height="300px" :src="randomCover">
           <v-card-title>加载中...</v-card-title>
         </v-img>
       </v-card>
@@ -46,7 +42,11 @@
               {{ articleItem.category }}
             </span>
           </v-btn>
-          <v-btn color="red" text>
+          <v-btn
+            color="red"
+            @click="likeArticle(articleList.indexOf(articleItem))"
+            text
+          >
             <span v-if="articleItem.like == 0">赞</span>
             <span v-else>{{ articleItem.like }}</span>
             <v-icon small>mdi-thumb-up</v-icon>
@@ -71,19 +71,33 @@
 import ArticleMethods from "../commons/article";
 
 export default {
-  name: "ArticleList",
+  name: "BlogArticleList",
   data: () => ({
     articleList: null,
-    randomCover: null,
   }),
-  mounted() {
-    let result = ArticleMethods.getArticleList();
-    if (result != null) {
-      this.articleList = result;
-    }
-    else{
-      // this.randomCover = ArticleMethods.getRandomCover();
-    }
+  methods: {
+    likeArticle(articleIndex) {
+      ArticleMethods.updateArticleLike(this.articleList[articleIndex].articleId)
+        .then(() => {
+          console.log(articleIndex);
+          this.articleList[articleIndex].Like++;
+          console.log(this.articleList);
+        })
+        .catch((error) => {
+          console.log("点赞文章异常" + error);
+          // 异常处理
+        });
+    },
+  },
+  created() {
+    ArticleMethods.getArticleList()
+      .then((resultList) => {
+        this.articleList = resultList;
+      })
+      .catch((error) => {
+        console.log("获取文章列表异常" + error);
+        // 异常处理
+      });
   },
 };
 </script>

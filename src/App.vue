@@ -30,7 +30,21 @@
       <MainContent />
     </v-main>
 
-    <v-footer app> Powered by Vue & .NET 5 | Made with love </v-footer>
+    <v-footer dark padless>
+      <v-card flat tile class="indigo lighten-1 white--text text-center">
+        <v-card-text> </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+          Powered by DotBlog hosted in ASP.NET Core. Made with love.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Gaein nidb</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-app>
 </template>
 
