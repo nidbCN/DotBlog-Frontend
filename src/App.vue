@@ -23,22 +23,33 @@
 
       <v-spacer />
 
-      <BarLinks />
+      <blog-barlinks />
     </v-app-bar>
 
     <v-main>
-      <MainContent />
+      <!-- <blog-main /> -->
+
+      <div>
+        <v-col cols="12">
+          <v-row align="start" justify="center">
+            <v-col cols="8" sm="10">
+              <v-container fluid>
+                <router-view />
+              </v-container>
+            </v-col>
+          </v-row>
+        </v-col>
+      </div>
+      
     </v-main>
 
     <v-footer dark padless>
-      <v-card flat tile class="indigo lighten-1 white--text text-center">
-        <v-card-text> </v-card-text>
-
-        <v-card-text class="white--text pt-0">
+      <v-card flat tile class="flex indigo lighten-1 white--text text-center">
+        <v-card-text class="white--text">
           Powered by DotBlog hosted in ASP.NET Core. Made with love.
         </v-card-text>
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-card-text class="white--text">
           {{ new Date().getFullYear() }} — <strong>Gaein nidb</strong>
@@ -49,15 +60,14 @@
 </template>
 
 <script>
-import BarLinks from "./components/BarLinks";
-import MainContent from "./components/MainContent";
+import BlogBarlinks from "./components/blog-barlinks.vue";
+// import BlogMain from './components/blog-main.vue';
 
 export default {
   name: "App",
-
   components: {
-    BarLinks,
-    MainContent,
+    BlogBarlinks,
+    // BlogMain,
   },
 
   data: () => ({

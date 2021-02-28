@@ -7,7 +7,7 @@
           height="400px"
           :src="articleContent.coverUrl"
         >
-          <v-card-title>{{articleContent.title}}</v-card-title>
+          <v-card-title>{{ articleContent.title }}</v-card-title>
         </v-img>
 
         <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
@@ -37,11 +37,10 @@ export default {
     articleContent: null,
   }),
   methods: {
-    likeArticle(articleIndex) {
+    likeArticle() {
       ArticleMethods.updateArticleLike(this.articleContent.articleId)
         .then(() => {
-          this.articleContent.Like++;
-          console.log(this.articleContent);
+          this.articleContent.like++;
         })
         .catch((error) => {
           console.log("点赞文章异常" + error);
@@ -49,7 +48,9 @@ export default {
         });
     },
   },
-  mounted() {
+  created() {
+
+    console.log(this.$route);
     ArticleMethods.getArticleContent()
       .then((resultContent) => {
         this.articleContent = resultContent;
@@ -60,7 +61,7 @@ export default {
       });
 
     ArticleMethods.updateArticleRead(this.articleContent.articleId)
-      .then()
+      .then(() => this.articleContent.read++)
       .catch((error) => {
         console.log("更新文章阅读异常" + error);
         // 异常处理

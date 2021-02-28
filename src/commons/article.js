@@ -63,8 +63,8 @@ export default {
         return new Promise((resolve, reject) => {
             Axios.get(url)
                 .then(response => {
-                    let result = response.data;
-                    resolve(result);
+                    let resultContent = response.data;
+                    resolve(resultContent);
                 })
                 .catch(error =>
                     reject(error)
@@ -74,9 +74,11 @@ export default {
     // 点赞文章
     updateArticleLike(aid) {
         const url = getApiUrlFunc(aid, "Like");
-        return new Promise(reject => {
+        return new Promise((resolve, reject) => {
             Axios.post(url)
-                .then()
+                .then(() =>
+                    resolve()
+                )
                 .catch(error =>
                     reject(error)
                 );
@@ -86,8 +88,11 @@ export default {
     // 阅读文章
     updateArticleRead(aid) {
         const url = getApiUrlFunc(aid, "Read");
-        return new Promise((reject) => {
+        return new Promise((resolve, reject) => {
             Axios.post(url)
+                .then(() =>
+                    resolve()
+                )
                 .catch(error =>
                     reject(error)
                 );

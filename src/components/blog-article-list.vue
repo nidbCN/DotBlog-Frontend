@@ -1,13 +1,5 @@
 <template>
   <div>
-    <v-container v-if="articleList == null" fluid>
-      <v-card loading class="mx-auto">
-        <v-img class="white--text align-end" height="300px" :src="randomCover">
-          <v-card-title>加载中...</v-card-title>
-        </v-img>
-      </v-card>
-    </v-container>
-
     <v-container v-for="(articleItem, index) in articleList" :key="index" fluid>
       <v-card class="mx-auto" v-if="articleItem.isShown">
         <v-img
@@ -42,11 +34,7 @@
               {{ articleItem.category }}
             </span>
           </v-btn>
-          <v-btn
-            color="red"
-            @click="likeArticle(articleList.indexOf(articleItem))"
-            text
-          >
+          <v-btn color="red" @click="likeArticle(articleItem)" text>
             <span v-if="articleItem.like == 0">赞</span>
             <span v-else>{{ articleItem.like }}</span>
             <v-icon small>mdi-thumb-up</v-icon>
@@ -58,7 +46,7 @@
             "
             color="orange"
           >
-            <span> 阅读全文 </span>
+            <router-link to = "articles/${articleItem.articleId}"><span> 阅读全文 </span></router-link>
             <v-icon>mdi-arrow-right-circle-outline</v-icon>
           </v-btn>
         </v-card-actions>
@@ -73,15 +61,14 @@ import ArticleMethods from "../commons/article";
 export default {
   name: "BlogArticleList",
   data: () => ({
+    defaultCover: null,
     articleList: null,
   }),
   methods: {
-    likeArticle(articleIndex) {
-      ArticleMethods.updateArticleLike(this.articleList[articleIndex].articleId)
+    likeArticle(articleItem) {
+      ArticleMethods.updateArticleLike(articleItem.articleId)
         .then(() => {
-          console.log(articleIndex);
-          this.articleList[articleIndex].Like++;
-          console.log(this.articleList);
+          articleItem.like++;
         })
         .catch((error) => {
           console.log("点赞文章异常" + error);

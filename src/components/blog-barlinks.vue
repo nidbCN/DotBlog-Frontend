@@ -16,7 +16,6 @@
 <script>
 export default {
   name: "BarLinks",
-
   data: () => ({
     linkList: [
       {
