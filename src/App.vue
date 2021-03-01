@@ -34,13 +34,13 @@
           <v-row align="start" justify="center">
             <v-col cols="8" sm="10">
               <v-container fluid>
-                <router-view />
+                <router-view></router-view>
               </v-container>
             </v-col>
           </v-row>
         </v-col>
       </div>
-      
+
     </v-main>
 
     <v-footer dark padless>

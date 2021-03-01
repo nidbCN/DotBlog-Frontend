@@ -1,8 +1,4 @@
-import Vue from "vue";
 import VueRouter from 'vue-router';
-
-Vue.use(VueRouter);
-
 import BlogArticleList from './components/blog-article-list.vue';
 import BlogArticleContent from './components/blog-article-content.vue'
 
