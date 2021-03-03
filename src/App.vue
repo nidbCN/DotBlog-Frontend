@@ -27,20 +27,7 @@
     </v-app-bar>
 
     <v-main>
-      <!-- <blog-main /> -->
-
-      <div>
-        <v-col cols="12">
-          <v-row align="start" justify="center">
-            <v-col cols="8" sm="10">
-              <v-container fluid>
-                <router-view></router-view>
-              </v-container>
-            </v-col>
-          </v-row>
-        </v-col>
-      </div>
-
+      <blog-main />
     </v-main>
 
     <v-footer dark padless>
@@ -60,18 +47,14 @@
 </template>
 
 <script>
-import BlogBarlinks from "./components/blog-barlinks.vue";
-// import BlogMain from './components/blog-main.vue';
+import BlogBarlinks from './components/blog-barlinks'
+import BlogMain from './components/blog-main.vue';
 
 export default {
   name: "App",
   components: {
     BlogBarlinks,
-    // BlogMain,
+    BlogMain,
   },
-
-  data: () => ({
-    //
-  }),
 };
 </script>

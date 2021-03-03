@@ -1,12 +1,10 @@
 import VueRouter from 'vue-router';
 import BlogArticleList from './components/blog-article-list.vue';
-import BlogArticleContent from './components/blog-article-content.vue'
+import BlogArticleContent from './components/blog-article-content.vue';
 
-const routes = [
-    {
-        path: '/home',
-        component: BlogArticleList,
-
+const routes = [{
+        path: '/',
+        component: BlogArticleList
     },
     {
         path: '/articles',

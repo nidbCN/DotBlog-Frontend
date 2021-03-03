@@ -4,8 +4,7 @@
       <v-row align="start" justify="center">
         <v-col cols="8" sm="10">
           <v-container fluid>
-            <router-view />
-            <!-- <blog-article-content /> -->
+            
           </v-container>
         </v-col>
       </v-row>
@@ -14,9 +13,8 @@
 </template>
 
 <script>
-// import BlogArticleContent from './blog-article-content.vue';
 export default {
-  name: "BlogMain",
-  // components: {BlogArticleContent},
+  name: "BlogReplyList",
+  components: {},
 };
 </script>
