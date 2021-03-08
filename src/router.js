@@ -11,7 +11,7 @@ const routes = [
         component: BlogArticleList,
     },
     {
-        path: '/articles',
+        path: '/articles/:aid/:alias',
         name:'Articles',
         component: () => import('./components/blog-article-content'),
     }

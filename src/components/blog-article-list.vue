@@ -41,12 +41,10 @@
           </v-btn>
           <v-spacer />
           <v-btn
-            :href="
-              'articles/' + articleItem.articleId + '/' + articleItem.alias
-            "
+            :href="'articles/' + articleItem.articleId + '/' + articleItem.alias"
             color="orange"
           >
-            <router-link to = "articles/${articleItem.articleId}"><span> 阅读全文 </span></router-link>
+            <span> 阅读全文 </span>
             <v-icon>mdi-arrow-right-circle-outline</v-icon>
           </v-btn>
         </v-card-actions>
