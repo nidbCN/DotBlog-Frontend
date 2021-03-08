@@ -1,19 +1,26 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router';
 import BlogArticleList from './components/blog-article-list.vue';
-import BlogArticleContent from './components/blog-article-content.vue';
 
-const routes = [{
+Vue.use(VueRouter)
+
+const routes = [
+    {
         path: '/',
-        component: BlogArticleList
+        name: 'Home',
+        component: BlogArticleList,
     },
     {
         path: '/articles',
-        component: BlogArticleContent
+        name:'Articles',
+        component: () => import('./components/blog-article-content'),
     }
 ];
 
 const router = new VueRouter({
-    routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: routes,
 });
 
 export default router;
