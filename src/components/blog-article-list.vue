@@ -40,13 +40,17 @@
             <v-icon small>mdi-thumb-up</v-icon>
           </v-btn>
           <v-spacer />
-          <v-btn
-            :href="'articles/' + articleItem.articleId + '/' + articleItem.alias"
-            color="orange"
+          <router-link
+            :to="{
+              name: 'Articles',
+              params: { aid: articleItem.articleId, alias: articleItem.alias },
+            }"
           >
-            <span> 阅读全文 </span>
-            <v-icon>mdi-arrow-right-circle-outline</v-icon>
-          </v-btn>
+            <v-btn color="orange">
+              <span> 阅读全文 </span>
+              <v-icon>mdi-arrow-right-circle-outline</v-icon>
+            </v-btn>
+          </router-link>
         </v-card-actions>
       </v-card>
     </v-container>

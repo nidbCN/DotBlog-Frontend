@@ -4,7 +4,7 @@
       <v-card class="mx-auto">
         <v-img
           class="white--text align-end"
-          height="400px"
+          height="300px"
           :src="articleContent.coverUrl"
         >
           <v-card-title>{{ articleContent.title }}</v-card-title>
@@ -24,9 +24,8 @@
         </v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>Whitehaven Beach</div>
-
-          <div>Whitsunday Island, Whitsunday Islands</div>
+          <v-divider />
+          <div>{{ articleContent.content }}</div>
         </v-card-text>
 
         <v-card-actions>
@@ -47,11 +46,12 @@ import ArticleMethods from "../commons/article";
 export default {
   name: "BlogArticleContent",
   data: () => ({
+    articleId: null,
     articleContent: null,
   }),
   methods: {
     likeArticle() {
-      ArticleMethods.updateArticleLike(this.articleContent.articleId)
+      ArticleMethods.updateArticleLike(this.articleId)
         .then(() => {
           this.articleContent.like++;
         })
@@ -62,17 +62,20 @@ export default {
     },
   },
   created() {
-    console.log(this.$route);
-    ArticleMethods.getArticleContent()
+    this.articleId = this.$route.params["aid"];
+    ArticleMethods.getArticleContent(this.articleId)
       .then((resultContent) => {
         this.articleContent = resultContent;
+        console.log(this.articleContent);
       })
       .catch((error) => {
         console.log("获取文章列表异常" + error);
         // 异常处理
       });
 
-    ArticleMethods.updateArticleRead(this.articleContent.articleId)
+    console.log(this.articleContent);
+
+    ArticleMethods.updateArticleRead(this.articleId)
       .then(() => this.articleContent.read++)
       .catch((error) => {
         console.log("更新文章阅读异常" + error);
@@ -80,5 +83,5 @@ export default {
       });
   },
 };
-</script>          
+</script>
       

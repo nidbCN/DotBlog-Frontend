@@ -64,6 +64,12 @@ export default {
             Axios.get(url)
                 .then(response => {
                     let resultContent = response.data;
+                    if (resultContent.coverUrl == null) {
+                        getRandomCoverFunc().then((result) => {
+                            resultContent.coverUrl = result;
+                            resolve(resultContent);
+                        });
+                    }
                     resolve(resultContent);
                 })
                 .catch(error =>
