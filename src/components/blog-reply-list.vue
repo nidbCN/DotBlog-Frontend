@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-col cols="12">
-      <v-row align="start" justify="center">
-        <v-col cols="8" sm="10">
-          <v-container fluid>
-            
-          </v-container>
-        </v-col>
-      </v-row>
-    </v-col>
+      <v-card class="mx-auto">
+        <v-card-title>回复：1</v-card-title>
+        <v-list-item two-line>
+          <v-list-item-content>
+            <v-list-item-title>Two-line item</v-list-item-title>
+            <v-list-item-subtitle>Secondary text</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
   </div>
 </template>
 

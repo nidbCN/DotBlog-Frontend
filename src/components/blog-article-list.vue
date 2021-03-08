@@ -3,9 +3,9 @@
     <v-container v-for="(articleItem, index) in articleList" :key="index" fluid>
       <v-card class="mx-auto" v-if="articleItem.isShown">
         <v-img
-          class="white--text align-end"
-          height="300px"
-          :src="articleItem.coverUrl"
+            class="white--text align-end"
+            height="300px"
+            :src="articleItem.coverUrl"
         >
           <v-card-title>{{ articleItem.title }}</v-card-title>
         </v-img>
@@ -28,9 +28,9 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="blue" text>
+          <v-btn v-if="articleItem.category != null" color="blue" text>
             <v-icon small>mdi-tag-text</v-icon>
-            <span v-if="articleItem.category != null">
+            <span >
               {{ articleItem.category }}
             </span>
           </v-btn>
@@ -39,12 +39,14 @@
             <span v-else>{{ articleItem.like }}</span>
             <v-icon small>mdi-thumb-up</v-icon>
           </v-btn>
-          <v-spacer />
+          <v-spacer/>
           <router-link
-            :to="{
+              :to="{
               name: 'Articles',
               params: { aid: articleItem.articleId, alias: articleItem.alias },
             }"
+
+              tag="div"
           >
             <v-btn color="orange">
               <span> 阅读全文 </span>
@@ -69,24 +71,24 @@ export default {
   methods: {
     likeArticle(articleItem) {
       ArticleMethods.updateArticleLike(articleItem.articleId)
-        .then(() => {
-          articleItem.like++;
-        })
-        .catch((error) => {
-          console.log("点赞文章异常" + error);
-          // 异常处理
-        });
+          .then(() => {
+            articleItem.like++;
+          })
+          .catch((error) => {
+            console.log("点赞文章异常" + error);
+            // 异常处理
+          });
     },
   },
   created() {
     ArticleMethods.getArticleList()
-      .then((resultList) => {
-        this.articleList = resultList;
-      })
-      .catch((error) => {
-        console.log("获取文章列表异常" + error);
-        // 异常处理
-      });
+        .then((resultList) => {
+          this.articleList = resultList;
+        })
+        .catch((error) => {
+          console.log("获取文章列表异常" + error);
+          // 异常处理
+        });
   },
 };
 </script>

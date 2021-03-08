@@ -23,7 +23,7 @@
 
       <v-spacer />
 
-      <blog-barlinks />
+      <blog-bar-links />
     </v-app-bar>
 
     <v-main>
@@ -47,13 +47,13 @@
 </template>
 
 <script>
-import BlogBarlinks from './components/blog-barlinks'
+import BlogBarLinks from './components/blog-bar-links'
 import BlogMain from './components/blog-main.vue';
 
 export default {
   name: "App",
   components: {
-    BlogBarlinks,
+    BlogBarLinks,
     BlogMain,
   },
 };
