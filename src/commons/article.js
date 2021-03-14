@@ -1,11 +1,12 @@
 import Axios from "axios";
+import config from "../config";
 
 // 返回API的Url
 function getApiUrlFunc(aid, point) {
-    let baseUrl = "https://api.gaein.cn/articles/";
-    if (aid != undefined || aid != null) {
+    let baseUrl = config.base_url;
+    if (aid !== undefined) {
         baseUrl += aid + "/";
-        if (point != undefined || point != null) {
+        if (point !== undefined) {
             baseUrl += point + "/";
         }
     }
@@ -14,9 +15,8 @@ function getApiUrlFunc(aid, point) {
 }
 // 获取随机封面
 function getRandomCoverFunc() {
-    const apiUrl = "https://api.gaein.cn/bing/pictures";
     return new Promise((resolve, reject) => {
-        Axios.get(apiUrl)
+        Axios.get(config.bing_api_url)
             .then(response => {
                 let result = response.data.url;
                 resolve(result) //相当于把东西提交
@@ -27,10 +27,6 @@ function getRandomCoverFunc() {
 }
 
 export default {
-    // 获取随机封面
-    getRandomCover() {
-        return getRandomCoverFunc();
-    },
     // 获取文章列表
     getArticleList() {
         const url = getApiUrlFunc();

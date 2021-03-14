@@ -44,7 +44,7 @@
       </v-card>
     </v-container>
     <v-container fluid>
-      <blog-reply-list />
+      <blog-reply-list :aid="articleId"/>
     </v-container>
   </div>
 
@@ -52,7 +52,7 @@
 
 <script>
 import ArticleMethods from "../commons/article";
-import BlogReplyList from "./blog-reply-list"
+import BlogReplyList from "../components/blog-reply-list"
 
 export default {
   components: {
@@ -80,7 +80,6 @@ export default {
     ArticleMethods.getArticleContent(this.articleId)
         .then((resultContent) => {
           this.articleContent = resultContent;
-          console.log(this.articleContent);
         })
         .catch((error) => {
           console.log("获取文章列表异常" + error);

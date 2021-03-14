@@ -1,13 +1,14 @@
 import Axios from "axios";
+import config from "@/config";
 
 // 返回API的Url
 function getApiUrl(aid, rid, point) {
-    let baseUrl = `https://api.gaein.cn/articles/${aid}/replies/`
-    if ((rid != undefined || rid != null) && (point != undefined || point != null)) {
+    let baseUrl = `${config.base_url}${aid}/replies/`
+    if ((rid !== undefined) && (point !== undefined)) {
         baseUrl += `${rid}/${point}`
     }
     return baseUrl;
-};
+}
 
 export default {
     // 获取评论列表
@@ -29,7 +30,9 @@ export default {
     // 点赞评论
     updateArticleLike(aid, rid) {
         let url = getApiUrl(aid, rid, "Like")
-        Axios.get(url).then(() => result = true)
+        Axios.get(url)
+            .then(() => {
+            })
             .catch(function (error) {
                 console.log("更新回复点赞数目失败：" + error);
             });

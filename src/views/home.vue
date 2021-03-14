@@ -35,7 +35,7 @@
             </span>
           </v-btn>
           <v-btn color="red" @click="likeArticle(articleItem)" text>
-            <span v-if="articleItem.like == 0">赞</span>
+            <span v-if="articleItem.like === 0">赞</span>
             <span v-else>{{ articleItem.like }}</span>
             <v-icon small>mdi-thumb-up</v-icon>
           </v-btn>
@@ -63,9 +63,8 @@
 import ArticleMethods from "../commons/article";
 
 export default {
-  name: "BlogArticleList",
+  name: "Home",
   data: () => ({
-    defaultCover: null,
     articleList: null,
   }),
   methods: {

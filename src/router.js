@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
-import BlogArticleList from './components/blog-article-list.vue';
+import BlogArticleList from './views/home';
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const routes = [
     {
         path: '/articles/:aid/:alias',
         name:'Articles',
-        component: () => import('./components/blog-article-content'),
+        component: () => import('./views/articles'),
     }
 ];
 
